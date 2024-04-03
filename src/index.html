@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="ts/main.ts"></script>
     <title>Document</title>
 </head>
+
 <body>
-    
+    <header>
+        <img src="pictures/placeholder logo.svg" alt="logotyp">
+        <h1>Att göra lista</h1>
+    </header>
+    <main>
+        <div id="add_div">
+            <form>
+                <label for="task_input">Uppgift</label>
+                <input name="task_input" id="task_input" type="text">
+                <label for="prio_input">Prioritet</label>
+                <select name="prio_input" id="prio_input">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </form>
+        </div>
+        <div id="list_div">
+
+        </div>
+    </main>
 </body>
+
 </html>
