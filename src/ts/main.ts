@@ -2,20 +2,30 @@ import { todoList } from "./todo";
 
 console.log("heel");
 
-let to1 = new todoList("Fixa tvätten", false, 2);
-let to2 = new todoList("Fixa disken", true, 1);
-let to3 = new todoList("rensa kylen", false, 3);
-let to4 = new todoList("handla", false, 1);
-let to5 = new todoList("servica bilen", false, 5)
 
-let toArr: todoList[] = [to1, to2, to3, to4, to5];
+document.addEventListener("DOMContentLoaded", () => {
+  let todoObj = new todoList();
+  todoObj.loadFromLocalStorage();
 
-console.log(toArr);
-
-const form = document.getElementById('example-form') as HTMLFormElement;
-
-form.onsubmit = (event) => {
-  event.preventDefault();
   
-  console.log("formulär inlämmat");
-};
+  const form = document.getElementById("add_form") as HTMLFormElement;
+  console.log(form);
+  form.onsubmit = (event) => {
+    event.preventDefault();
+
+    let newTaskInput = (
+      document.getElementById("task_input") as HTMLInputElement
+    ).value;
+    let newPrioInput = (
+      document.getElementById("prio_input") as HTMLInputElement
+    ).value;
+    let prio: number = parseInt(newPrioInput);
+
+    let d: boolean = todoObj.addTodo(newTaskInput, prio)
+    if (d == false) {
+      alert("Du måste fylla i uppgift fältet för att skapa en uppgift");
+    }
+
+    console.log("formulär inlämmat");
+  };
+});

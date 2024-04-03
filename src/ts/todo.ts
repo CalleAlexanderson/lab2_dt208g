@@ -10,21 +10,17 @@ export class todoList implements todo {
   priority: number;
   todos: todo[] = [];
 
-  // constructor som tar in värden när klassen skapas, om priority inte sätts till 1, 2 eller 3 sätts den till 3
-  constructor(t: string, comp: boolean, prio: number) {
-    this.task = t;
-    this.completed = comp;
-    if (prio == 1 || prio == 2 || prio == 3) {
-      this.priority = prio;
-    } else {
-      this.priority = 3;
-      console.log("priotet kan bara vara 1, 2 eller 3");
-    }
-  }
-
   // skapar nya todo object, completed sätts alltid till false när objektet skapas
   addTodo(taskAdd: string, priorityAdd: number): boolean {
-    if (true) {
+    if (taskAdd != "") {
+      let newTodo: todo = {
+        task: taskAdd,
+        completed: false,
+        priority: priorityAdd,
+      };
+      this.todos.push(newTodo);
+      console.log(this.todos);
+      this.saveToLocalStorage();
       return true;
     } else {
       return false;
@@ -38,12 +34,22 @@ export class todoList implements todo {
   removeTodo(todoIndex: number): void {}
 
   getTodos(): todo[] {
-    return [];
+    return this.todos;
   }
 
   // lägger todos arrayen i localstorage i form av en string
-  saveToLocalStorage(): void {}
+  saveToLocalStorage(): void {
+    console.log("sparat i storage");
+    localStorage.setItem("todos", JSON.stringify(this.todos));
+    console.log(localStorage.getItem("todos"));
+  }
 
   // hämtar todos arrayen från local storage
-  loadFromLocalStorage(): void {}
+  loadFromLocalStorage(): void {
+    if (localStorage.getItem("todos") != null) {
+      const storedTodos: any = localStorage.getItem("todos");
+      this.todos = JSON.parse(storedTodos);
+      console.log(this.todos);
+    }
+  }
 }
