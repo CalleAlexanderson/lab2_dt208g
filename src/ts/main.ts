@@ -1,35 +1,32 @@
 import { todoList } from "./todo";
-// localStorage.setItem('todos', "");
 
 document.addEventListener("DOMContentLoaded", () => {
   let todoObj = new todoList();
-  todoObj.loadFromLocalStorage();
 
   showTodos();
 
   const form = document.getElementById("add_form") as HTMLFormElement;
-  console.log(form);
-  form.onsubmit = (event) => {
+  form.onsubmit = (event) => { //när användaren trycker på "skapa ny uppgift" knappen körs det här
     event.preventDefault();
 
-    let newTaskInput = (
-      document.getElementById("task_input") as HTMLInputElement
-    );
+    let newTaskInput = document.getElementById(
+      "task_input"
+    ) as HTMLInputElement;
     let newPrioInput = (
       document.getElementById("prio_input") as HTMLInputElement
     ).value;
     let prio: number = parseInt(newPrioInput);
 
-    let d: boolean = todoObj.addTodo(newTaskInput.value, prio);
-    if (d == false) {
+    let err: boolean = todoObj.addTodo(newTaskInput.value, prio);
+    if (err == false) { // om task fältet inte är ifyllt får användaren en alert
       alert("Du måste fylla i uppgift fältet för att skapa en uppgift");
     }
 
-    console.log("formulär inlämmat");
     newTaskInput.value = "";
     showTodos();
   };
 
+  // skapar artiklar med av de olika todo som finns i array todos
   function showTodos() {
     const todoDiv = document.getElementById("list_div") as HTMLDivElement;
     todoDiv.innerHTML = "";
@@ -40,24 +37,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let pTask = document.createElement("p") as HTMLParagraphElement;
       pTask.innerHTML = todoArr[index].task;
+      pTask.id = "artTask";
 
       let imgComplete = document.createElement("img") as HTMLImageElement;
+      
+      // gör så man kan klicka i en ruta för att checka av avklarade uppgifter
+      imgComplete.addEventListener("click", () => {
+        todoObj.markTodoCompleted(index);
+        if (todoArr[index].completed == true) {
+          this.src = "/check.090b22b8.png"; // check.png fick det här namnet när den kördes igenom parcel
+          this.alt = "Avklarad";
+          showTodos();
+        } else {
+          this.src = "/white.9aadd005.png";
+          this.alt = "Inte avklarad";
+          showTodos();
+        }
+      });
+
+      // om complete är true så blir bilden i rutan en check annars bara vitt
       if (todoArr[index].completed == true) {
-        imgComplete.src = "";
+        imgComplete.src = "/check.090b22b8.png";
+        this.alt = "Avklarad";
       } else {
-        imgComplete.src = "";
+        imgComplete.src = "/white.9aadd005.png";
+        this.alt = "Inte avklarad";
       }
 
       let pDate = document.createElement("p") as HTMLParagraphElement;
-      pDate.innerHTML = todoArr[index].date;
+      pDate.innerHTML = "Skapades: "+todoArr[index].date;
+      pDate.id = "artDate";
 
       let pPrio = document.createElement("p") as HTMLParagraphElement;
-      pPrio.innerHTML = todoArr[index].priority.toString();
+      pPrio.innerHTML = "Prioritet: "+ todoArr[index].priority.toString();
+      pPrio.id = "artPrio";
 
+      // knapp som låter dig ta bort uppgifter från todos
       let btnRemove = document.createElement("button") as HTMLButtonElement;
       btnRemove.innerHTML = "Ta bort uppgift";
       btnRemove.addEventListener("click", () => {
-        if (btnRemove.parentElement != null) {
+        if (btnRemove.parentElement != null) { // if sats för annars blir TS sur
           btnRemove.parentElement.remove();
           todoObj.removeTodo(index);
           showTodos();
