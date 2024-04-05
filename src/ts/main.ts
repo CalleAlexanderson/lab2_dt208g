@@ -45,9 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
       imgComplete.addEventListener("click", () => {
         todoObj.markTodoCompleted(index);
         if (todoArr[index].completed == true) {
+          console.log(this);
           this.src = "pictures/check.png"; // check.png fick det här namnet när den kördes igenom parcel
           showTodos();
         } else {
+          console.log(this);
           this.src = "pictures/white.png";
           showTodos();
         }
