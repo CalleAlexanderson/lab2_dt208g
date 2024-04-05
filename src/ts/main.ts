@@ -45,12 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
       imgComplete.addEventListener("click", () => {
         todoObj.markTodoCompleted(index);
         if (todoArr[index].completed == true) {
-          console.log(this);
-          this.src = "/check.61c44097.png"; // check.png fick det här namnet när den kördes igenom netlify
+          imgComplete.src = "/check.61c44097.png"; // check.png fick det här namnet när den kördes igenom netlify
           showTodos();
         } else {
-          console.log(this);
-          this.src = "/white.a89867d7.png";
+          imgComplete.src = "/white.a89867d7.png";
           showTodos();
         }
       });
