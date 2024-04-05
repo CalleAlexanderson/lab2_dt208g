@@ -1,4 +1,4 @@
-#Att göra lista
+## Att göra lista
 
 I denna laboration har jag skapat en att göra lista med typescript genom att använda klasser.
 
