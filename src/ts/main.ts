@@ -46,20 +46,20 @@ document.addEventListener("DOMContentLoaded", () => {
         todoObj.markTodoCompleted(index);
         if (todoArr[index].completed == true) {
           console.log(this);
-          this.src = "pictures/check.png"; // check.png fick det här namnet när den kördes igenom parcel
+          this.src = "/check.61c44097.png"; // check.png fick det här namnet när den kördes igenom netlify
           showTodos();
         } else {
           console.log(this);
-          this.src = "pictures/white.png";
+          this.src = "/white.a89867d7.png";
           showTodos();
         }
       });
 
       // om complete är true så blir bilden i rutan en check annars bara vitt
       if (todoArr[index].completed == true) {
-        imgComplete.src = "pictures/check.png";
+        imgComplete.src = "/check.61c44097.png";
       } else {
-        imgComplete.src = "pictures/white.png";
+        imgComplete.src = "/white.a89867d7.png";
       }
 
       let pDate = document.createElement("p") as HTMLParagraphElement;
