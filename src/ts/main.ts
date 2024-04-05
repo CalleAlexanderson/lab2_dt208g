@@ -45,23 +45,19 @@ document.addEventListener("DOMContentLoaded", () => {
       imgComplete.addEventListener("click", () => {
         todoObj.markTodoCompleted(index);
         if (todoArr[index].completed == true) {
-          this.src = "/check.090b22b8.png"; // check.png fick det här namnet när den kördes igenom parcel
-          this.alt = "Avklarad";
+          this.src = "pictures/check.png"; // check.png fick det här namnet när den kördes igenom parcel
           showTodos();
         } else {
-          this.src = "/white.9aadd005.png";
-          this.alt = "Inte avklarad";
+          this.src = "pictures/white.png";
           showTodos();
         }
       });
 
       // om complete är true så blir bilden i rutan en check annars bara vitt
       if (todoArr[index].completed == true) {
-        imgComplete.src = "/check.090b22b8.png";
-        this.alt = "Avklarad";
+        imgComplete.src = "pictures/check.png";
       } else {
-        imgComplete.src = "/white.9aadd005.png";
-        this.alt = "Inte avklarad";
+        imgComplete.src = "pictures/white.png";
       }
 
       let pDate = document.createElement("p") as HTMLParagraphElement;
